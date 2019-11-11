@@ -18,6 +18,7 @@
         <p>{{dish.description}}</p>
       </mat-card-content>
       <mat-card-actions>
+        <button mat-button (click)="goBack()">BACK</button>
         <button mat-button>LIKE</button>
         <button mat-button>SHARE</button>
       </mat-card-actions>
@@ -26,16 +27,15 @@
     <!-- <p>Display the details of the Dish here</p> -->
   </div>
 
-  <div fxFlex="40">
-   <mat-list *ngIf="dish">
-      <h3>Comments</h3>
-     <mat-list-item *ngFor="let c of dish.comments">
-        <div matLine>{{c.comment}}</div>
-        <div matLine>{{c.rating}} stars</div>
-          <div matLine>--{{c.author}} {{c.date | date}}</div>
-     </mat-list-item>
-   </mat-list>
-    
+  <div fxFlex="40" >
+      <mat-list *ngIf="dish">
+        <h3><strong>Comments</strong></h3>
+        <mat-list-item *ngFor="let c of dish.comments">
+          <div matLine>{{c.comment}}</div>
+          <div matLine>{{c.rating}} Stars</div>
+          <div matLine>-- {{c.author}} {{c.date | date}}</div>
+        </mat-list-item>
+      </mat-list>
   </div>
 
 </div>
