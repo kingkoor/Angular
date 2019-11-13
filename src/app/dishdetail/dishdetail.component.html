@@ -43,6 +43,14 @@
           <div matLine>-- {{c.author}} {{c.date | date}}</div>
         </mat-list-item>
       </mat-list>
+      <mat-list *ngIf="commentForm.valid">
+        <mat-list-item> 
+            <div matLine>{{commentForm.get('comment').value}}</div>
+            <div matLine>{{commentForm.get('rating').value}} Stars</div>
+            <div matLine>-- {{commentForm.get('author').value}} </div>
+        </mat-list-item>
+
+      </mat-list>
       <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()" #cform="ngForm">
           <p>
             <mat-form-field class="full-width">
