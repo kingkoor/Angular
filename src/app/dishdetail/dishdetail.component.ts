@@ -4,6 +4,8 @@ import {Location} from '@angular/common';
 import {Dish } from '../shared/dish';
 import { DishService} from '../services/dish.service';
 import { switchMap } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import { Comment} from '../shared/comment';
 
 @Component({
   selector: 'app-dishdetail',
@@ -16,10 +18,35 @@ export class DishdetailComponent implements OnInit {
   dishIds: string[];
   prev: string;
   next: string;
+  commentForm : FormGroup;
+  comment : Comment;
 
-  constructor(private dishService: DishService, private location: Location,
-    private route: ActivatedRoute) { }
+  formErrors = {
+    'author': '',
+    'comment': ''
+  };
 
+  validationMessages = {
+    'author': {
+      'required': 'Author name is required.',
+      'minlength': ' Author name must be at least 2 characters long.'
+    },
+    'comment': {
+      'required': 'Comment is required.'
+    }
+  };
+
+  constructor(private dishService: DishService, private location: Location, private route: ActivatedRoute, private fb: FormBuilder) {
+    this.createForm();
+   }
+
+  createForm() {
+    this.commentForm = this.fb.group({
+      'author': ['', Validators.required],
+      'rating': 0,
+      'comment': ''
+    });
+  }
   ngOnInit() {
     this.dishService.getDishIds()
     .subscribe(dishIds => this.dishIds = dishIds);
@@ -36,5 +63,10 @@ export class DishdetailComponent implements OnInit {
   }
   goBack(): void {
     this.location.back();
+  }
+  onSubmit()
+  {
+    this.comment = this.commentForm.value;
+    console.log(this.comment);
   }
 }

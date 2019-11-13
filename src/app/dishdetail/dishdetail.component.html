@@ -43,6 +43,29 @@
           <div matLine>-- {{c.author}} {{c.date | date}}</div>
         </mat-list-item>
       </mat-list>
+      <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+          <p>
+            <mat-form-field class="full-width">
+              <input matInput formControlName="author" placeholder="Name" type="text" required>
+            </mat-form-field>
+            <mat-error *ngIf="formErrors.author">
+                {{ formErrors.author }}
+            </mat-error>
+          </p>
+          <p>
+            <mat-slider thumbLabel min="1" max="5" step="1" tickInterval="1"  formControlName="rating"></mat-slider>
+          </p>
+  
+          <p>
+            <mat-form-field class="full-width">
+                <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12></textarea>
+            </mat-form-field>
+            <mat-error *ngIf="formErrors.comment">
+                {{ formErrors.comment }}
+            </mat-error>
+          </p>
+          <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
+        </form>
   </div>
   <div fxFlex [hidden]="dish">
       <mat-spinner></mat-spinner><h4>Looading...Please Wait</h4>
