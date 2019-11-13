@@ -43,7 +43,7 @@
           <div matLine>-- {{c.author}} {{c.date | date}}</div>
         </mat-list-item>
       </mat-list>
-      <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+      <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()" #cform="ngForm">
           <p>
             <mat-form-field class="full-width">
               <input matInput formControlName="author" placeholder="Name" type="text" required>
