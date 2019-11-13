@@ -21,6 +21,8 @@ import { MatSliderModule } from '@angular/material/slider';
 //template driven form
 import { FormsModule} from '@angular/forms';
 import { ReactiveFormsModule} from '@angular/forms';
+import { HttpModule} from '@angular/http';
+import { HttpClientModule} from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
@@ -39,6 +41,7 @@ import {LeaderService} from './services/leader.service';
 
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
+import { baseURL} from './shared/baseurl';
 
 
 @NgModule({
@@ -61,6 +64,8 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    HttpModule,
+    HttpClientModule,
     MatListModule,
     MatGridListModule,
     MatCardModule,
@@ -77,7 +82,7 @@ import { LoginComponent } from './login/login.component';
   entryComponents: [
     LoginComponent
   ],
-  providers: [DishService, PromotionService,LeaderService],
+  providers: [DishService, PromotionService,LeaderService, { provide: 'BaseURL', useValue: baseURL}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
